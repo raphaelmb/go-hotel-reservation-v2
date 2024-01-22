@@ -6,12 +6,14 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-func Routes() http.Handler {
+func (s *Server) Routes() http.Handler {
 	e := echo.New()
 
-	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "hello")
-	})
+	e.GET("/health", s.healthHandler)
 
 	return e
+}
+
+func (s *Server) healthHandler(c echo.Context) error {
+	return c.JSON(http.StatusOK, s.db.Health())
 }

@@ -1,1 +1,8 @@
+# binary folder
 bin/
+
+# env file
+.env
+
+# docker data
+db-data/
