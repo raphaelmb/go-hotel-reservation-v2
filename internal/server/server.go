@@ -14,11 +14,14 @@ import (
 
 type Server struct {
 	port int
-	db   database.Service
+	db   *database.Service
 }
 
-func NewServer() *http.Server {
-	port, _ := strconv.Atoi(os.Getenv("PORT"))
+func NewServer() (*http.Server, error) {
+	port, err := strconv.Atoi(os.Getenv("PORT"))
+	if err != nil {
+		return nil, fmt.Errorf("Error: could not parse PORT env variable")
+	}
 	NewServer := &Server{
 		port: port,
 		db:   database.New(),
@@ -29,5 +32,5 @@ func NewServer() *http.Server {
 		IdleTimeout:  time.Minute,
 		ReadTimeout:  10 * time.Second,
 		WriteTimeout: 30 * time.Second,
-	}
+	}, nil
 }

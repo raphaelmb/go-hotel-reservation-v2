@@ -7,6 +7,8 @@ import (
 )
 
 func (s *Server) Routes() http.Handler {
+	// userStore := database.NewUserStore(s.db)
+	// userHandler := handlers.NewUserHandler(userStore)
 	e := echo.New()
 
 	e.GET("/health", s.healthHandler)
