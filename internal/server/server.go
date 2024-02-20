@@ -20,7 +20,7 @@ type Server struct {
 func NewServer() (*http.Server, error) {
 	port, err := strconv.Atoi(os.Getenv("PORT"))
 	if err != nil {
-		return nil, fmt.Errorf("Error: could not parse PORT env variable")
+		return nil, fmt.Errorf("error: could not parse PORT env variable")
 	}
 	NewServer := &Server{
 		port: port,

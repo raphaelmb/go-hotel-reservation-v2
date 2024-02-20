@@ -7,11 +7,12 @@ import (
 )
 
 func (s *Server) Routes() http.Handler {
-	// userStore := database.NewUserStore(s.db)
-	// userHandler := handlers.NewUserHandler(userStore)
+	userHandler := UserHandler(s.db)
+
 	e := echo.New()
 
 	e.GET("/health", s.healthHandler)
+	e.GET("/users", userHandler.HandleGetUser)
 
 	return e
 }
